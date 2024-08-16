@@ -1,0 +1,40 @@
+﻿<Window x:Class="TradeDataMonitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Trade Monitor" Height="700" Width="855" Background="#C9DABF">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" MinHeight="57" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,10,10">
+            <TextBlock   Text="Refresh Frequency (seconds):" VerticalAlignment="Center" Margin="0,0,10,0" />
+            <TextBox Width="50" Text="{Binding RefreshFrequency, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Apply" Command="{Binding ApplyRefreshFrequencyCommand}" Margin="10,0,0,0" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,10,10,10">
+            <TextBlock Text="Input Directory:" VerticalAlignment="Center" Margin="0,0,10,0" />
+            <TextBox Width="300"  Text="{Binding InputDirectory, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Apply" Command="{Binding ApplyInputDirectoryCommand}" Margin="20,0,0,0" />
+        </StackPanel>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Trades}" AutoGenerateColumns="False" RenderTransformOrigin="0.5,0.5" Margin="2,53,-2,4" Grid.RowSpan="2">
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform AngleX="0.292" />
+                    <RotateTransform />
+                    <TranslateTransform X="-1.495" />
+                </TransformGroup>
+            </DataGrid.RenderTransform>
+            <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="135" Header="Date" Binding="{Binding Date, StringFormat={}{0:yyyy-MM-dd}}" />
+                <DataGridTextColumn MinWidth="135" Header="Open" Binding="{Binding Open}" />
+                <DataGridTextColumn MinWidth="135" Header="High" Binding="{Binding High}" />
+                <DataGridTextColumn MinWidth="135" Header="Low" Binding="{Binding Low}" />
+                <DataGridTextColumn MinWidth="135" Header="Close" Binding="{Binding Close}" />
+                <DataGridTextColumn MinWidth="135" Header="Volume" Binding="{Binding Volume}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
