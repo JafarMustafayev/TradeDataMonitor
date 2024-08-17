@@ -1,6 +1,4 @@
-﻿using TradeMonitor.Models;
-
-namespace TradeMonitor.Loaders
+﻿namespace TradeMonitor.Loaders
 {
     public interface ITradeLoader
     {

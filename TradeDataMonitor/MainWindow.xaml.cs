@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using TradeMonitor.ViewModels;
-
-namespace TradeDataMonitor
+﻿namespace TradeDataMonitor
 {
     public partial class MainWindow : Window
     {

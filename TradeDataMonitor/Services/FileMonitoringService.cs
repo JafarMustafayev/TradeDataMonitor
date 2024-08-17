@@ -1,9 +1,4 @@
-﻿using System.IO;
-using TradeMonitor.Configuration;
-using TradeMonitor.Loaders;
-using TradeMonitor.Models;
-
-namespace TradeMonitor.Services
+﻿namespace TradeMonitor.Services
 {
     public class FileMonitoringService
     {

@@ -1,7 +1,4 @@
-﻿using System.IO;
-using TradeMonitor.Models;
-
-namespace TradeMonitor.Loaders
+﻿namespace TradeMonitor.Loaders
 {
     public class TxtTradeLoader : ITradeLoader
     {

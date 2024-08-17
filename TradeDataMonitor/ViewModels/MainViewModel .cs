@@ -1,12 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Input;
-using TradeMonitor.Models;
-using TradeMonitor.Services;
-
-namespace TradeMonitor.ViewModels
+﻿namespace TradeMonitor.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
@@ -55,7 +47,6 @@ namespace TradeMonitor.ViewModels
 
         public ICommand ApplyRefreshFrequencyCommand { get; }
         public ICommand ApplyInputDirectoryCommand { get; }
-        public ICommand RefreshCommand { get; } // Yeni əlavə edilən komanda
 
         public MainViewModel(FileMonitoringService monitoringService)
         {
@@ -70,12 +61,28 @@ namespace TradeMonitor.ViewModels
 
         private void ApplyRefreshFrequency()
         {
-            _monitoringService.UpdateMonitoringFrequency(RefreshFrequency);
+            if (RefreshFrequency >= 5)
+            {
+                _monitoringService.UpdateMonitoringFrequency(RefreshFrequency);
+                MessageBox.Show($"Refresh Frequency updated successfully to {RefreshFrequency} seconds", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Refresh Frequency should be at least 5 seconds", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ApplyInputDirectory()
         {
-            _monitoringService.UpdateInputDirectory(InputDirectory);
+            if (Directory.Exists(InputDirectory))
+            {
+                _monitoringService.UpdateInputDirectory(InputDirectory);
+                MessageBox.Show($"Input Directory updated successfully to {InputDirectory}", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Directory does not exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void OnNewTradesLoaded(object sender, IEnumerable<Trade> newTrades)

@@ -1,7 +1,4 @@
-﻿using System.Xml.Linq;
-using TradeMonitor.Models;
-
-namespace TradeMonitor.Loaders
+﻿namespace TradeMonitor.Loaders
 {
     public class XmlTradeLoader : ITradeLoader
     {

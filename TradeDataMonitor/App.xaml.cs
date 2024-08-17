@@ -1,11 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
-using TradeMonitor.Configuration;
-using TradeMonitor.Loaders;
-using TradeMonitor.Services;
-using TradeMonitor.ViewModels;
-
-namespace TradeDataMonitor
+﻿namespace TradeDataMonitor
 {
     public partial class App : Application
     {
