@@ -9,5 +9,4 @@ global using System.Xml.Linq;
 global using TradeMonitor.Configuration;
 global using TradeMonitor.Loaders;
 global using TradeMonitor.Models;
-global using TradeMonitor.Services;
 global using TradeMonitor.ViewModels;
