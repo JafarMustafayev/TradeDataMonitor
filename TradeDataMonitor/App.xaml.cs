@@ -3,6 +3,7 @@
     public partial class App : Application
     {
         private ServiceProvider serviceProvider;
+        private string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -18,7 +19,7 @@
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<AppConfig>(sp => AppConfig.Load("C:\\Users\\Jafar Mustafayev\\Desktop\\New folder\\TradeDataMonitor\\TradeDataMonitor\\appsettings.json"));
+            services.AddSingleton<AppConfig>(sp => AppConfig.Load(configPath));
             services.AddSingleton<FileMonitoringService>();
             services.AddSingleton<MainViewModel>();
             services.AddTransient<MainWindow>();
