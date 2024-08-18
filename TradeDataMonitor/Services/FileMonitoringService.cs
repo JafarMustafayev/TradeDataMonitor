@@ -19,14 +19,17 @@ public class FileMonitoringService
         InitializeTimer();
     }
 
-    private void InitializeFileWatcher()
+    private void InitializeFileWatcher(string? path = null)
     {
-        _watcher = new FileSystemWatcher(_config.InputDirectory)
+        if (Directory.Exists(_config.InputDirectory))
         {
-            NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite,
-            Filter = "*.*"
-        };
-        _watcher.EnableRaisingEvents = false;
+            _watcher = new FileSystemWatcher(path != null ? _config.InputDirectory : path)
+            {
+                NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite,
+                Filter = "*.*"
+            };
+            _watcher.EnableRaisingEvents = false;
+        }
     }
 
     private void InitializeTimer()
@@ -44,15 +47,18 @@ public class FileMonitoringService
 
     private void CheckForChanges()
     {
-        var directoryInfo = new DirectoryInfo(_config.InputDirectory);
-        foreach (var file in directoryInfo.GetFiles())
+        if (Directory.Exists(_config.InputDirectory))
         {
-            var lastWriteTime = file.LastWriteTime;
-            if (!_fileLastWriteTimes.TryGetValue(file.FullName, out var storedLastWriteTime) ||
-                storedLastWriteTime != lastWriteTime)
+            var directoryInfo = new DirectoryInfo(_config.InputDirectory);
+            foreach (var file in directoryInfo.GetFiles())
             {
-                _fileLastWriteTimes[file.FullName] = lastWriteTime;
-                OnFileCreated(file.FullName);
+                var lastWriteTime = file.LastWriteTime;
+                if (!_fileLastWriteTimes.TryGetValue(file.FullName, out var storedLastWriteTime) ||
+                    storedLastWriteTime != lastWriteTime)
+                {
+                    _fileLastWriteTimes[file.FullName] = lastWriteTime;
+                    OnFileCreated(file.FullName);
+                }
             }
         }
     }
@@ -88,11 +94,19 @@ public class FileMonitoringService
     {
         _config.InputDirectory = path;
         _config.Save("appsettings.json");
+        InitializeFileWatcher(path);
         _watcher.Path = path;
         _fileLastWriteTimes.Clear();
     }
 
-    public string GetInputDirectory() => _config.InputDirectory;
+    public string GetInputDirectory()
+    {
+        if (Directory.Exists(_config.InputDirectory))
+        {
+            return _config.InputDirectory;
+        }
+        return string.Empty;
+    }
 
     public int GetRefreshFrequency() => _config.MonitoringFrequencySeconds;
 }
