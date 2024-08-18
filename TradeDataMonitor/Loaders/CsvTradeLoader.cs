@@ -16,7 +16,9 @@ namespace TradeMonitor.Loaders
                 {
                     if (isFirstLine)
                     {
-                        isFirstLine = false;
+                        if (line.Contains("Content"))
+                        { isFirstLine = !isFirstLine; }
+
                         continue;
                     }
 

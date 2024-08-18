@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.IO;
-
-namespace TradeMonitor.Configuration
+﻿namespace TradeMonitor.Configuration
 {
     public class AppConfig
     {

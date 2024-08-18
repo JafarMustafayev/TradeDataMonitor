@@ -26,7 +26,7 @@ public class FileMonitoringService
             NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite,
             Filter = "*.*"
         };
-        _watcher.EnableRaisingEvents = false; // Disable immediate event raising
+        _watcher.EnableRaisingEvents = false;
     }
 
     private void InitializeTimer()
@@ -81,7 +81,7 @@ public class FileMonitoringService
     {
         _config.MonitoringFrequencySeconds = seconds;
         _config.Save("appsettings.json");
-        _timer.Interval = seconds * 1000; // Update timer interval
+        _timer.Interval = seconds * 1000;
     }
 
     public void UpdateInputDirectory(string path)
@@ -89,7 +89,7 @@ public class FileMonitoringService
         _config.InputDirectory = path;
         _config.Save("appsettings.json");
         _watcher.Path = path;
-        _fileLastWriteTimes.Clear(); // Clear tracked files when the directory changes
+        _fileLastWriteTimes.Clear();
     }
 
     public string GetInputDirectory() => _config.InputDirectory;

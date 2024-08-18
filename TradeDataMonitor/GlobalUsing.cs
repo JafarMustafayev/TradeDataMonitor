@@ -1,4 +1,5 @@
 ﻿global using Microsoft.Extensions.DependencyInjection;
+global using Newtonsoft.Json;
 global using System.Collections.ObjectModel;
 global using System.ComponentModel;
 global using System.IO;

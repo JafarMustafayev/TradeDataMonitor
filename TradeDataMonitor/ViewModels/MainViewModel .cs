@@ -61,14 +61,14 @@
 
         private void ApplyRefreshFrequency()
         {
-            if (RefreshFrequency >= 5)
+            if (RefreshFrequency >= 1)
             {
                 _monitoringService.UpdateMonitoringFrequency(RefreshFrequency);
                 MessageBox.Show($"Refresh Frequency updated successfully to {RefreshFrequency} seconds", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Refresh Frequency should be at least 5 seconds", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Refresh Frequency should be at least 1 seconds", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -96,7 +96,7 @@
             });
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -107,7 +107,7 @@
         private readonly Action _execute;
         private readonly Func<bool> _canExecute;
 
-        public RelayCommand(Action execute, Func<bool> canExecute = null)
+        public RelayCommand(Action execute, Func<bool>? canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
